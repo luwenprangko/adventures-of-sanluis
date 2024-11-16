@@ -110,27 +110,45 @@
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                     </div>
-                    
+                
                     <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" placeholder="Enter your email" required>
                     </div>
-                    
+                
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
                         <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
                     </div>
-                    
+                
                     <div class="form-group">
                         <label for="room">Room Type</label>
                         <select id="room" name="room" required>
                             <option value="" disabled selected>Select room type</option>
-                            <option value="single">Single</option>
-                            <option value="double">Double</option>
-                            <option value="suite">Suite</option>
+                            <optgroup label="Villas - Low Season">
+                                <option value="acacia_low">Acacia (2 Pax) - P5,999</option>
+                                <option value="gmelina_low">Gmelina (2 Pax) - P5,999</option>
+                                <option value="mahogany_low">Mahogany (4 Pax) - P9,999</option>
+                                <option value="molave_low">Molave (8 Pax) - P15,999</option>
+                                <option value="narra_low">Narra (8 Pax) - P15,999</option>
+                            </optgroup>
+                            <optgroup label="Villas - High Season">
+                                <option value="acacia_high">Acacia (2 Pax) - P6,999</option>
+                                <option value="gmelina_high">Gmelina (2 Pax) - P6,999</option>
+                                <option value="mahogany_high">Mahogany (4 Pax) - P11,999</option>
+                                <option value="molave_high">Molave (8 Pax) - P17,999</option>
+                                <option value="narra_high">Narra (8 Pax) - P17,999</option>
+                            </optgroup>
+                            <optgroup label="Events">
+                                <option value="pavilion">Pavilion - P35,000</option>
+                            </optgroup>
+                            <optgroup label="Swimming">
+                                <option value="small_cottage">Small Cottage - P1,500</option>
+                                <option value="big_cottage">Big Cottage - P2,000</option>
+                            </optgroup>
                         </select>
                     </div>
-                    
+                
                     <div class="form-group-half">
                         <div class="form-group">
                             <label for="checkin">Check-in Date</label>
@@ -141,9 +159,10 @@
                             <input type="date" id="checkout" name="checkout" required>
                         </div>
                     </div>
-                    
+                
                     <button type="button" class="btn" id="bookNowBtn">Book Now</button>
                 </form>
+                
             </div>
 
             <div class="payment-form hidden" id="paymentForm">
