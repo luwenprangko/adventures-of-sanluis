@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hotel Booking Form</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 400px;
+                width: 100%;
+            }
+
+            .booking-form, .payment-form {
+                background: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                text-align: center;
+                margin-bottom: 20px;
+                color: #343a40;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            label {
+                display: block;
+                font-size: 14px;
+                margin-bottom: 5px;
+                color: #495057;
+            }
+
+            .booking-form input, 
+            .booking-form select,
+            .payments input {
+                width: 100%;
+                padding: 10px;
+                font-size: 14px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                outline: none;
+                transition: border-color 0.3s;
+            }
+
+            input:focus, select:focus {
+                border-color: #007bff;
+            }
+
+            .form-group-half {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .form-group-half .form-group {
+                flex: 1;
+            }
+
+            .btn {
+                display: block;
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+                font-weight: bold;
+                color: #fff;
+                background: #007bff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background 0.3s;
+                text-align: center;
+            }
+
+            .btn:hover {
+                background: #0056b3;
+            }
+
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="booking-form">
+                <h2>Food Reservation</h2>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="room">Reservation for Table</label>
+                        <select id="room" name="room" required>
+                            <option value="" disabled selected>Select Table</option>
+                            <optgroup label="4 PAX">
+                                <option value="table1">Table 1</option>
+                                <option value="table2">Table 2</option>
+                                <option value="table3">Table 3</option>
+                                <option value="table4">Table 4</option>
+                            </optgroup>
+                            <optgroup label="8 PAX">
+                                <option value="table5">Table 5</option>
+                                <option value="table6">Table 6</option>
+                                <option value="table7">Table 7</option>
+                                <option value="table8">Table 8</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                
+                    <div class="form-group-half">
+                        <div class="form-group">
+                            <label for="checkin">Reservation Date</label>
+                            <input type="date" id="eservation" name="reservation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout">Time</label>
+                            <input type="time" id="time" name="time" required>
+                        </div>
+                    </div>
+                
+                    <button type="button" class="btn" id="bookNowBtn">Reserve Now</button>
+                </form>
+                
+            </div>
+
+            <div class="payment-form hidden" id="paymentForm">
+                <h2>Select Payment Method</h2>
+                <div class="form-group">
+                    <label>Payment Options</label>
+                    <div>
+                        <input type="radio" id="gcash" name="paymentMethod" value="gcash">
+                        <label for="gcash">GCash</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="maya" name="paymentMethod" value="maya">
+                        <label for="maya">Maya</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="card" name="paymentMethod" value="card">
+                        <label for="card">Credit/Debit Card</label>
+                    </div>
+                </div>
+
+                <div class="payments">
+                    <div id="gcashFields" class="hidden">
+                        <div class="form-group">
+                            <label for="gcashNumber">GCash Number</label>
+                            <input type="tel" id="gcashNumber" placeholder="Enter your GCash number">
+                        </div>
+                    </div>
+
+                    <div id="mayaFields" class="hidden">
+                        <div class="form-group">
+                            <label for="mayaNumber">Maya Number</label>
+                            <input type="tel" id="mayaNumber" placeholder="Enter your Maya number">
+                        </div>
+                    </div>
+
+                    <div id="cardFields" class="hidden">
+                        <div class="form-group">
+                            <label for="cardName">Cardholder Name</label>
+                            <input type="text" id="cardName" placeholder="Name on card">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+                        </div>
+                        <div class="form-group-half">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="month" id="expiry">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" id="payNowBtn">Pay Now</button>
+            </div>
+        </div>
+
+        <script>
+            const bookNowBtn = document.getElementById('bookNowBtn');
+            const bookingForm = document.querySelector('.booking-form');
+            const paymentForm = document.getElementById('paymentForm');
+            const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+            const gcashFields = document.getElementById('gcashFields');
+            const mayaFields = document.getElementById('mayaFields');
+            const cardFields = document.getElementById('cardFields');
+
+            bookNowBtn.addEventListener('click', () => {
+                bookingForm.classList.add('hidden');
+                paymentForm.classList.remove('hidden');
+            });
+
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', () => {
+                    gcashFields.classList.add('hidden');
+                    mayaFields.classList.add('hidden');
+                    cardFields.classList.add('hidden');
+
+                    if (method.value === 'gcash') gcashFields.classList.remove('hidden');
+                    if (method.value === 'maya') mayaFields.classList.remove('hidden');
+                    if (method.value === 'card') cardFields.classList.remove('hidden');
+                });
+            });
+        </script>
+    </body>
+</html>
