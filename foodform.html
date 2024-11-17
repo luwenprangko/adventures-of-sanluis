@@ -143,7 +143,7 @@
                     <div class="form-group-half">
                         <div class="form-group">
                             <label for="checkin">Reservation Date</label>
-                            <input type="date" id="eservation" name="reservation" required>
+                            <input type="date" id="reservation" name="reservation" required>
                         </div>
                         <div class="form-group">
                             <label for="checkout">Time</label>
@@ -334,8 +334,8 @@
         const email = document.getElementById("email").value;
         const phone = document.getElementById("phone").value;
         const room = document.getElementById("room").selectedOptions[0].text;
-        const checkin = document.getElementById("checkin").value;
-        const checkout = document.getElementById("checkout").value;
+        const checkin = document.getElementById("reservation").value;
+        const checkout = document.getElementById("time").value;
         const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || "Not specified";
 
         let paymentInfo = "No additional payment details provided.";
