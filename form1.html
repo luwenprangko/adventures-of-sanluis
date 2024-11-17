@@ -250,5 +250,195 @@
                 });
             });
         </script>
+
+
+<script>
+    // Add Modal HTML for Receipt
+    const receiptModalHTML = `
+        <div id="receiptModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn" id="closeReceiptModal">&times;</span>
+                <h2>Booking Receipt</h2>
+                <div id="receiptDetails"></div>
+                <button class="btn" id="pay">Pay Now</button>
+                <button class="btn" id="closeReceipt">Close</button>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", receiptModalHTML);
+
+    // Add Receipt Modal Styles
+    const receiptStyle = document.createElement("style");
+    receiptStyle.textContent = `
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #343a40;
+        }
+
+        #receiptDetails {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        #receiptDetails p {
+            margin: 5px 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .preload {
+            font-size: 16px;
+            color: #007bff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    `;
+    document.head.appendChild(receiptStyle);
+
+    // Payment Button and Modal Functionality
+    const payNowBtn = document.getElementById("payNowBtn");
+    const receiptModal = document.getElementById("receiptModal");
+    const closeReceiptModal = document.getElementById("closeReceiptModal");
+    const closeReceipt = document.getElementById("closeReceipt");
+    const receiptDetails = document.getElementById("receiptDetails");
+
+    // Payment Button Click Handler
+    payNowBtn.addEventListener("click", () => {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const room = document.getElementById("room").selectedOptions[0].text;
+        const checkin = document.getElementById("checkin").value;
+        const checkout = document.getElementById("checkout").value;
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || "Not specified";
+
+        let paymentInfo = "No additional payment details provided.";
+        if (paymentMethod === "gcash") {
+            const gcashNumber = document.getElementById("gcashNumber").value;
+            paymentInfo = `GCash Number: ${gcashNumber}`;
+        } else if (paymentMethod === "maya") {
+            const mayaNumber = document.getElementById("mayaNumber").value;
+            paymentInfo = `Maya Number: ${mayaNumber}`;
+        } else if (paymentMethod === "card") {
+            const cardName = document.getElementById("cardName").value;
+            const cardNumber = document.getElementById("cardNumber").value;
+            const expiry = document.getElementById("expiry").value;
+            paymentInfo = `Cardholder Name: ${cardName}<br>Card Number: ${cardNumber}<br>Expiry Date: ${expiry}`;
+        }
+
+        // Populate Receipt Modal
+        receiptDetails.innerHTML = `
+            <p><strong>Full Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Room Type:</strong> ${room}</p>
+            <p><strong>Check-in:</strong> ${checkin}</p>
+            <p><strong>Check-out:</strong> ${checkout}</p>
+            <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+            <p>${paymentInfo}</p>
+        `;
+
+        // Show Receipt Modal
+        receiptModal.classList.remove("hidden");
+    });
+
+    // Close Modal
+    closeReceiptModal.addEventListener("click", () => {
+        receiptModal.classList.add("hidden");
+    });
+
+    closeReceipt.addEventListener("click", () => {
+        receiptModal.classList.add("hidden");
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener("click", (e) => {
+        if (e.target === receiptModal) {
+            receiptModal.classList.add("hidden");
+        }
+    });
+
+    // Add Modal for Payment Success
+    const successModalHTML = `
+        <div id="successModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn" id="closeSuccessModal">&times;</span>
+                <h2>Payment Successful</h2>
+                <div id="successDetails">
+                    <div class="preload">Processing Payment... Please wait.</div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", successModalHTML);
+
+    const successModal = document.getElementById("successModal");
+    const closeSuccessModal = document.getElementById("closeSuccessModal");
+    const successDetails = document.getElementById("successDetails");
+
+    // Handle Pay Now Button for Payment Success
+    const payButton = document.getElementById("pay");
+    payButton.addEventListener("click", () => {
+        // Show the success modal with preload text
+        successModal.classList.remove("hidden");
+
+        // Simulate a 3-second delay before showing success message
+        setTimeout(() => {
+            // Remove preload text and show success message
+            successDetails.innerHTML = "<p>Thank you for your booking! Your payment was successful.</p>";
+        }, 3000); // 3-second delay
+    });
+
+    // Close Success Modal
+    closeSuccessModal.addEventListener("click", () => {
+        successModal.classList.add("hidden");
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener("click", (e) => {
+        if (e.target === successModal) {
+            successModal.classList.add("hidden");
+        }
+    });
+</script>
+
+
+
     </body>
 </html>
